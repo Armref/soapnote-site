@@ -1,10 +1,10 @@
 HAS-BLED score for bleeding risk in anticoagulated atrial fibrillation
-[select name="Q1" value="no (0 points)=0|YES (1 point)=1"] 160 mm Hg)
+[select name="Q1" value="no (0 points)=0|YES (1 point)=1"] <-- Hypertension (systolic blood pressure >160 mmHg160 mm Hg)
 [select name="Q2" value="no (0 points)=0|YES (1 point)=1"] <-- Abnormal renal function (chronic dialysis, renal transplantation, or serum creatinine ≥ 2.3 mg/dL)
-[select name="Q3" value="no (0 points)=0|YES (1 point)=1"]  2x normal, Alkaline phosphatase > 3x normal, liver transaminases > 3x normal
+[select name="Q3" value="no (0 points)=0|YES (1 point)=1"] <-- Abnormal liver function (chronic hepatic disease (eg. cirrhosis) or biochemical evidence of significant hepatic derangement (eg. bilirubin >2x upper limit of normal, in association with AST/ALT/ALP >3x upper limit normal)
 [select name="Q4" value="no (0 points)=0|YES (1 point)=1"] <-- Stroke
 [select name="Q5" value="no (0 points)=0|YES (1 point)=1"] <-- Bleeding tendency/predisposition (history of bleeding or predisposition such as anemia)
-[select name="Q6" value="no (0 points)=0|YES (1 point)=1"] <-- Labile INRs - if on warfarin - (history of over- anticoagulation or time in therapeutic range < 60%)
+[select name="Q6" value="no (0 points)=0|YES (1 point)=1"] <-- Labile INRs - if on warfarin - (history of over-anticoagulation or time in therapeutic range < 60%)
 [select name="Q7" value="no (0 points)=0|YES (1 point)=1"] <-- Elderly (age > 65 y)
 [select name="Q8" value="no (0 points)=0|YES (1 point)=1"] <-- Drugs (concomitant antiplatelet or nonsteroidal anti-inflammatory drugs)
 [select name="Q9" value="no (0 points)=0|YES (1 point)=1"] <-- Alcohol intake in excess (> 8 drinks weekly)
