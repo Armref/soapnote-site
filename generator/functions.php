@@ -1,8 +1,8 @@
 <?php
 session_start() ;
-define('APP_URL', 'http://www.soapnote.org/generator');
-define('TEMPLATE_PATH', dirname(__FILE__) . '/template');
-define('DATA_PATH', dirname(__FILE__) . '/data');
+define('APP_URL', '../generator');//changes herehttp://localhost/exp/soapnote-site-master/generator/expindex.php#
+define('TEMPLATE_PATH', APP_URL. '/template');
+define('DATA_PATH', APP_URL. '/data');
 define('DATA_URL', APP_URL . '/data');
 define('ASSETS_PATH', dirname(dirname(__FILE__)) . '/lib');
 
@@ -126,8 +126,8 @@ function generateFormFile($title, $content, $fileName, $admin = false) {
 
 function deleteTempFiles() {
 	$files = glob(DATA_PATH.'/*.html');
-	$files = array_merge($files, glob(DATA_PATH.'/text/*.txt'));
-	$files = array_merge($files, glob(DATA_PATH.'/zip/*.zip'));
+	$files = array_merge($files, glob(DATA_PATH.'/*.txt'));
+	$files = array_merge($files, glob(DATA_PATH.'/*.zip'));
 	
   $now   = time();
 
@@ -138,8 +138,8 @@ function deleteTempFiles() {
 }
 
 function generateTextFile($content,$fileName) {
-        file_put_contents(DATA_PATH.'/text/'.$fileName .'.txt', $content);
-        return DATA_URL .'/text/'.$fileName . '.txt';
+        file_put_contents(DATA_PATH.'/'.$fileName .'.txt', $content);
+        return DATA_URL .'/'.$fileName . '.txt';
 }
 
 function getHtml($data, $zipFilePath) {
@@ -175,7 +175,7 @@ function getUserId($reset=false) {
 			'default' => ''
 		), $atts ) );
 
-		if ($atts[0] == '*') $required = ' required="required"';
+		//if ($atts[0] == '*') $required = ' required="required"';
 
 		if (empty($name)) $name = uniqid('text_');
 		
@@ -225,7 +225,7 @@ function getUserId($reset=false) {
 		), $atts ) );
 
 
-		if ($atts[0] == '*') $required = ' required="required"';
+		//if ($atts[0] == '*') $required = ' required="required"';
 		if (empty($name)) $name = uniqid('textarea_');
 
 		if (!empty($memo)) $memo = '<span class="memo exclude">'.$memo.'</span>';
@@ -286,8 +286,8 @@ function getUserId($reset=false) {
 			'help' => '',
 			'value' => ''
 		), $atts ) );
-
-		if ($atts[0] == '*') $required = ' required="required"';
+			///changes here 'name -->0
+	//	if ($atts[0] == '*') $required = ' required="required"';
 		if (empty($name)) $name = uniqid('checkbox_');
 
 		if (!empty($memo)) $memo = '<span class="memo exclude">'.$memo.'</span>';
@@ -322,7 +322,7 @@ function getUserId($reset=false) {
 			'value' => ''
 		), $atts ) );
 
-		if ($atts[0] == '*') $required = ' required="required"';
+		//if ($atts[0] == '*') $required = ' required="required"';
 		if (empty($name)) $name = uniqid('radio_');
 
 		if (!empty($memo)) $memo = '<span class="memo exclude">'.$memo.'</span>';

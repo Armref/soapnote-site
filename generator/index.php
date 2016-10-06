@@ -11,11 +11,11 @@ if(isset($_GET['file'])) {
 include('../lib/main-header.php');
 include('../lib/generator-header.php');
 
-?>
-<head>
+?><head>
 <title>Template & Calculator Generator - SOAPnote.org</title>
 <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
 </head>
+
 <ul class="breadcrumb">
 	<li><a href="/">Home</a></li>
 	<li class="active">Form Generator</li>
@@ -23,40 +23,40 @@ include('../lib/generator-header.php');
 
 <div class="container">
 	<div class="row">
-		<div class="col-sm-8">
+		<div class="col-sm-10 col-sm-offset-1">
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					<button id="open_btn" class="btn btn-primary">Open File</button>
-					<button id= "archive_btn" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Archived Files</button>
-					<button id="save_btn" class="btn btn-primary">Save File</button>
-					<button id="download_txt_btn" class="btn btn-primary" style="display:none">Download TXT File</button>
-				</div>
-				<!-- Modal -->
-				<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-					<div class="modal-dialog">
-						<div class="modal-content">
-							<div class="modal-header">
-								<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-								<h4 class="modal-title" id="myModalLabel">Archived Files</h4>
-							</div>
-							<div class="modal-body">
-								<iframe id="archived_file_frame" src="http://www.soapnote.org/generator/github/github.php" width="100%" height="380" frameborder="0" allowtransparency="true"></iframe>  
-							</div>
-						</div>
-						<!-- /.modal-content -->
-					</div>
-					<!-- /.modal-dialog -->
-				</div>
-				<!-- /.modal -->
-				<div class="panel-body">
-					<div class="form-group">
-						<label >Form Title:</label>
-						<input type="text" class="form-control" id="formTitle" name="formTitle" value="<?php echo $fileName ?>">
-					</div>
-					<div class="form-group">
-						<div class="dropdown taggen-button">
-						  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-							Generate Tag
+               <div class="row">
+               <div class="col-sm-8 col-xs-12">
+               <div class="col-sm-3 col-xs-12">
+               
+                <div class="dropdown">
+  <button class="btn btn-primary dropdown-toggle btn-block" type="button" data-toggle="dropdown">Open File
+  <span class="caret"></span></button>
+  <ul class="dropdown-menu">
+    <li><a  href="#"><button id="open_btn1" class="btn btn-link ">Local File</button></a></li>
+    <li><a  href="#"><button id= "archive_btn" class="btn btn-link" data-toggle="modal" data-target="#myModal">Archived Files</button></a></li>
+    <li><a href="#"><button id= "public_btn" class="btn btn-link" data-toggle="modal" data-target="#publicModal">Public Files</button></a></li>
+    <li><a href="#"><button id= "gist_btn" class="btn btn-link" data-toggle="modal" data-target="#gistModal">Gist Files</button></a></li>
+  </ul>
+</div>
+</div>
+<div class="col-sm-3 col-xs-12">
+ <div class="dropdown">
+  <button class="btn btn-primary dropdown-toggle btn-block" type="button" data-toggle="dropdown">Save File
+  <span class="caret"></span></button>
+  <ul class="dropdown-menu">
+    <li><a  href="#"><button id="save_btn" class="btn btn-link">Locally</button></a></li>
+    <li><a  href="#"><button id= "save_public_btn" class="btn btn-link" data-toggle="modal" data-target="#save_publicModal">Public Folder</button></a></li>
+    <li><a href="#"><button id= "save_gist_btn" class="btn btn-link" data-toggle="modal" data-target="#save_gistModal">Create Gist</button></a></li>
+    <li><a href="#"><button id= "save_repos_btn" class="btn btn-link" data-toggle="modal" data-target="#save_reposModal">User Repository</button></a></li>
+  </ul>
+</div>
+</div>
+ <div class="col-sm-3 col-xs-12">
+               	<div class="dropdown">
+						  <button class="btn btn-primary dropdown-toggle btn-block" type="button" id="dropdownMenu1" data-toggle="dropdown"  aria-expanded="true">
+							Tool
 							<span class="caret"></span>
 						  </button>
 						  <ul id="taggen-button-list" class="dropdown-menu" aria-labelledby="taggen">
@@ -76,23 +76,265 @@ include('../lib/generator-header.php');
 								
 						  </ul>
 						</div>
+                        <button type="button" id="download_form" class="btn btn-primary" style="display:none" >Export</button>
+</div>
+
+
+
+</div>
+<!-- .rwo btn-group ends-->
+ <div class="col-sm-4 col-xs-12" align="center">
+
+ <div class="col-sm-6 col-xs-6">
+                
+  <button class="btn btn-success btn-block " type="button" id="markup_btn" data-toggle="dropdown">Markup
+ </button>
+
+</div>
+  <div class="col-sm-6 col-xs-6">
+               
+  <button class="btn  btn-primary  btn-block" type="button"  id="generate_btn">Form</button>
+  
+
+</div>
+
+</div>
+<!--.row ends below-->
+</div>
+				<button id="download_txt_btn" class="btn btn-primary" style="display:none">Download TXT File</button>            
+				</div>
+				<!-- Mymodal -->
+				<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+								<h4 class="modal-title" id="myModalLabel">Archived Files</h4>
+							</div>
+							<div class="modal-body"><!--http://www.soapnote.org/generator/github/github.php-->
+								<iframe id="archived_file_frame" src="github/expgithub.php" width="100%" height="380" frameborder="0" allowtransparency="true"></iframe>  
+							</div>
+						</div>
+						<!-- /.modal-content -->
+					</div>
+					<!-- /.modal-dialog -->
+				</div>
+				<!-- /.modal -->
+                
+                	<!-- public Modal -->
+				<div class="modal fade" id="publicModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+								<h4 class="modal-title" id="myModalLabel">Public Files</h4>
+							</div>
+							<div class="modal-body"><!--http://www.soapnote.org/generator/github/github.php-->
+								<iframe id="public_file_frame" src="github/public.php" width="100%" height="380" frameborder="0" allowtransparency="true"></iframe>  
+							</div>
+						</div>
+						<!-- /.modal-content -->
+					</div>
+					<!-- /.modal-dialog -->
+				</div>
+				<!-- /.modal -->
+                	<!-- gist Modal -->
+				<div class="modal fade" id="gistModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" id="gistmodal_close" data-dismiss="modal" aria-hidden="true">&times;</button>
+								<h4 class="modal-title" id="myModalLabel">Public Gist File</h4>
+							</div>
+							<div class="modal-body"><!--http://www.soapnote.org/generator/github/github.php-->
+                            <div class="row bg-danger text-danger" align="center" id="err" style="color:red;"></div>
+                            <form action="" method="post">
+                             <div class="form-group">
+    <label for="username">Enter Github Username:</label>
+    <input  class="form-control"  type="text" id="username" name="username" placeholder="UserName"/>
+  </div>
+                                <div class="form-group">
+    <label for="filename">Enter Public Gist Filename:</label>
+       <div class="input-group">
+    
+      <input  class="form-control"  type="text" id="filename" name="filename" Placeholder="FileName"/> <div class="input-group-addon">.txt</div>
+    </div>
+   
+  
+  </div>
+  
+                            <button type="button" id="go" class="btn btn-primary">Submit</button>
+
+                           
+                             </form>
+                            
+								<!--<iframe id="gist_file_frame" src="github/gist.php" width="100%" height="380" frameborder="0" allowtransparency="true"></iframe>  -->
+							</div>
+						</div>
+						<!-- /.modal-content -->
+					</div>
+					<!-- /.modal-dialog -->
+				</div>
+				<!-- /.modal -->
+                  	<!-- gist Modal -->
+				<div class="modal fade" id="save_publicModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" id="save_publicmodal_close" data-dismiss="modal" aria-hidden="true">&times;</button>
+								<h4 class="modal-title" id="myModalLabel">Save to saopnote-public Repository</h4>
+							</div>
+							<div class="modal-body"><!--http://www.soapnote.org/generator/github/github.php-->
+                            <div class="row bg-danger text-danger" align="center" id="err_save_topublic" ></div>
+                            <div class="row bg-success text-success" align="center" id="success_save_topublic" ></div>
+                            <form action="" method="post">
+                           
+   
+      <div class="form-group">
+    <label for="username_tp">UserName:</label>
+    <input  class="form-control" type="text" id="username_tp" name="username" required/>
+  </div>
+       <div class="form-group">
+    <label for="password_tp">Password:</label>
+    <input  class="form-control"  type="password" id="password_tp" name="password"  required/>
+  </div>
+     <div class="form-group">
+    <label for="filename_tp">Filename:</label>
+       <div class="input-group">
+    
+      <input  class="form-control"  type="text" id="filename_tp" name="filename_tp"required Placeholder="FileName"/> <div class="input-group-addon">.txt</div>
+    </div>
+  </div>
+
+                            <button type="button" id="save_topublic" class="btn btn-primary">Save</button>
+                             </form>
+                            
+								<!--<iframe id="gist_file_frame" src="github/gist.php" width="100%" height="380" frameborder="0" allowtransparency="true"></iframe>  -->
+							</div>
+						</div>
+						<!-- /.modal-content -->
+					</div>
+					<!-- /.modal-dialog -->
+				</div>
+				<!-- /.modal -->
+                  	<!-- gist Modal -->
+				<div class="modal fade" id="save_gistModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" id="save_gistmodal_close" data-dismiss="modal" aria-hidden="true">&times;</button>
+								<h4 class="modal-title" id="myModalLabel">Create Gist</h4>
+							</div>
+							<div class="modal-body"><!--http://www.soapnote.org/generator/github/github.php-->
+                            <div class="row text-success" align="center" id="link" ></div>
+                             <div class="row text-danger bg-danger" align="center" id='err_save_togist' ></div>
+                           
+                            <div class="row text-danger bg-danger" align="center" id="err" ></div>
+                            
+                            <form action="" method="post">
+                            
+ <div class="form-group">
+    <label for="save_gistfilename">Filename:</label>
+       <div class="input-group">
+    
+      <input  class="form-control"  type="text" id="save_gistfilename" name="save_gistfilename" required="required"/> <div class="input-group-addon">.txt</div>
+    </div>
+  </div>
+                            <button type="button" id="save_togist" class="btn btn-primary">save</button>
+                             </form>
+                            
+								<!--<iframe id="gist_file_frame" src="github/gist.php" width="100%" height="380" frameborder="0" allowtransparency="true"></iframe>  -->
+							</div>
+						</div>
+						<!-- /.modal-content -->
+					</div>
+					<!-- /.modal-dialog -->
+				</div>
+				<!-- /.modal -->
+                  	<!-- gist Modal -->
+				<div class="modal fade" id="save_reposModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" id="reposmodal_close" data-dismiss="modal" aria-hidden="true">&times;</button>
+								<h4 class="modal-title" id="myModalLabel">Save to User's Repository</h4>
+							</div>
+							<div class="modal-body"><!--http://www.soapnote.org/generator/github/github.php-->
+                            <div class="row bg-danger text-danger" align="center" id="err_save_torepos" ></div>
+                            <div class="row bg-success text-success" align="center" id="success_save_torepos" ></div>
+                            <form action="" method="post">
+                      
+                       
+  
+      <div class="form-group">
+    <label for="username_repos">UserName:</label>
+    <input  class="form-control" type="text" id="username_repos" name="username_repos" required/>
+  </div>
+       <div class="form-group">
+    <label for="password_repos">Password:</label>
+    <input  class="form-control"  type="password" id="password_repos" name="password_repos" required/>
+  </div>
+   <div class="form-group">
+    <label for="repository_repos">Repository:</label>
+    <input  class="form-control" type="text" id="repository_repos" name="repository_repos" placeholder="repository/folder(if exists)" required/>
+  </div>
+  
+     <div class="form-group">
+    <label for="filename_repos">Filename:</label>
+       <div class="input-group">
+    
+      <input  class="form-control"  type="text"  id="filename_repos" name="filename_repos" required Placeholder="FileName"/> <div class="input-group-addon">.txt</div>
+    </div>
+  </div>
+                     
+                        
+                            <button type="button" id="save_torepos" class="btn btn-primary">Save</button>
+                             </form>
+                            
+								<!--<iframe id="gist_file_frame" src="github/gist.php" width="100%" height="380" frameborder="0" allowtransparency="true"></iframe>  -->
+							</div>
+						</div>
+						<!-- /.modal-content -->
+					</div>
+					<!-- /.modal-dialog -->
+				</div>
+				<!-- /.modal -->
+                
+				<div id="form_content" class="panel-body">
+					<div class="form-group">
+						<label >Form Title:</label>
+						<input type="text" class="form-control" id="formTitle" name="formTitle" value="<?php echo $fileName ?>">
+					</div>
+					<div class="form-group">
+					
 						<label >Form Content:</label>
 						<textarea name="content" id="content" class="form-control" rows=25><?php echo $content ?></textarea>
 					</div>
+                    
 				</div>
-				<div class="panel-footer" style="text-align:center">
-					<button id="generate_btn" class="btn btn-primary">Generate Form</button>
-					<button id="download_form" class="btn btn-primary" style="display:none">Download form</button>
-				</div>
-			</div>
-			<div class="panel panel-default">
-				<div class="panel-heading">
+                <div style="display:none" id="form_display" class="panel panel-default">
+				<div  class="panel-heading">
 					Form Display 
 				</div>
-				<div class="panel-body">
+				<div  class=" panel-body">
 					<iframe src="" id="iframeForm" style="width:100%; height:800px"></iframe>
 				</div>
 			</div>
+				<!--<div class="panel-footer" style="text-align:center">
+					
+					
+				</div>
+                -->
+			</div>
+			<!--<div style="display:none" id="form_display" class="panel panel-default">
+				<div  class="panel-heading">
+					Form Display 
+				</div>
+				<div  class=" panel-body">
+					<iframe src="" id="iframeForm" style="width:100%; height:800px"></iframe>
+				</div>
+			</div>
+            -->
 		</div>
 
 		<!-- text box generator -->
@@ -620,6 +862,7 @@ include('../lib/generator-header.php');
 </style>
 <link rel="stylesheet" href="../lib/jquery-ui.min.css" type="text/css" media="all"/>
 <script type="text/javascript" src="../lib/jquery-ui.min.js"></script>
+
 <script type="text/javascript">
 jQuery(document).ready(function($){
 	$('#taggen-date-default').datepicker({dateFormat:"mm/dd/yy"});
@@ -687,9 +930,10 @@ jQuery(document).ready(function($){
 	
 });
 </script>
+
 		<script type="text/javascript">
 			$(document).ready(function(){   
-					$("#open_btn").click(function() {
+					$("#open_btn1").click(function() {
 							$.FileDialog({
 									 accept: "text/plain",
 									 dropheight: 150,
@@ -704,15 +948,99 @@ jQuery(document).ready(function($){
 									});
 					});
 			
+			
+//gist file access function starts here
+			
+					$("#go").click(function(){
+						var username=document.getElementById('username').value;
+						var filename=document.getElementById('filename').value+'.txt';
+						$.ajax({
+									  url: 'https://api.github.com/users/'+username+'/gists',
+									  type: 'GET',
+									  dataType: 'jsonp',
+									  success: function(gistdata) {
+										
+										var i=0;
+										var j=0;
+										
+											
+										if(gistdata.data[i])
+											{
+												
+													while(i<gistdata.data.length)
+													{
+															 if(gistdata.data[i].files[filename])
+										 						{
+																			
+										
+																			var url1=gistdata.data[i].files[filename].raw_url;
+																			 $.ajax({
+																			 url: url1,
+																			 type: 'GET',
+																			 dataType: 'text',
+																			 success:	function(gistdata1) {
+																			 data=gistdata1;
+																			
+																			document.getElementById('content').innerHTML=data;
+																			document.getElementById('gistmodal_close').click();
+																			j=j+1;
+																			i=gistdata.data.length+3;
+																						},
+																			 error: function(e1) {
+																								
+																				 // document.getElementById('info').innerHTML="failed";
+																				  // ajax error
+																												}
+																			})
+																		}
+															i++;}
+												
+													if(i==gistdata.data.length)
+													document.getElementById('err').innerHTML="FileName is incorrect";
+													}
+												else
+													{
+													document.getElementById("err").innerHTML="UserName is incorrect/Server Over Flooded ,Try after sometime";
+													
+													}
+										
+													},
+													error: function(e2) {
+																			console.log(e2+"first ajax failed");
+																		  //document.getElementById('info').innerHTML="failed";
+																		  // ajax error
+																		}
+									  
+									})
+																		
+					});
+					
+			
 					$("#download_txt_btn").click(function() { 
+				
+				
 							window.open("<?php echo APP_URL ?>/downloadFile.php?type=txt", "_blank");
 					});
 			
 					$("#download_form").click(function() { 
 							window.open("<?php echo APP_URL ?>/downloadFile.php?type=zip", "_blank");
 					});
-			
+					
+					$("#markup_btn").click(function(){
+						$("#download_form").hide();
+						$("#dropdownMenu1").show();
+						$('#form_display').hide();
+						$('#form_content').show();
+						this.className="btn btn-success btn-block";
+						document.getElementById("generate_btn").className="btn btn-primary btn-block";
+					
+						
+						});
 					$("#generate_btn").click(function() { 
+					$('#form_content').hide();
+					$('#form_display').show();
+					this.className="btn btn-success btn-block";
+				document.getElementById("markup_btn").className="btn btn-primary btn-block";
 							$.post('<?php echo APP_URL ?>/ajax.php', 
 								{
 									act: "generateForm",
@@ -724,6 +1052,7 @@ jQuery(document).ready(function($){
 									} else {
 											$("#iframeForm").attr('src', result);
 											$("#download_form").show();
+											$("#dropdownMenu1").hide();
 									}
 							});
 					
@@ -748,6 +1077,10 @@ jQuery(document).ready(function($){
 			});
 			
 		</script>
+        
+<script src="js/save_to_repos.js" type="text/javascript"></script>
+<script src="js/save_to_gist.js" type="text/javascript"></script>
+<script src="js/save_to_public.js" type="text/javascript"></script>
 	</div>
 </div>
 <?php
