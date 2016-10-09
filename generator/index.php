@@ -38,6 +38,7 @@ include('../lib/generator-header.php');
     <li><a  href="#"><button id= "archive_btn" class="btn btn-link" data-toggle="modal" data-target="#myModal">Archived Files</button></a></li>
     <li><a href="#"><button id= "public_btn" class="btn btn-link" data-toggle="modal" data-target="#publicModal">Public Files</button></a></li>
     <li><a href="#"><button id= "gist_btn" class="btn btn-link" data-toggle="modal" data-target="#gistModal">Gist Files</button></a></li>
+	<li><a href="#"><button id= "drive_btn" class="btn btn-link" >Drive Files</button></a></li>
   </ul>
 </div>
 </div>
@@ -50,6 +51,7 @@ include('../lib/generator-header.php');
     <li><a  href="#"><button id= "save_public_btn" class="btn btn-link" data-toggle="modal" data-target="#save_publicModal">Public Folder</button></a></li>
     <li><a href="#"><button id= "save_gist_btn" class="btn btn-link" data-toggle="modal" data-target="#save_gistModal">Create Gist</button></a></li>
     <li><a href="#"><button id= "save_repos_btn" class="btn btn-link" data-toggle="modal" data-target="#save_reposModal">User Repository</button></a></li>
+	<li><a href="#"><button id= "save_drive_btn" class="btn btn-link" onclick="doAuth()">Google Drive</button></a></li>
   </ul>
 </div>
 </div>
@@ -120,7 +122,6 @@ include('../lib/generator-header.php');
 					<!-- /.modal-dialog -->
 				</div>
 				<!-- /.modal -->
-                
                 	<!-- public Modal -->
 				<div class="modal fade" id="publicModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 					<div class="modal-dialog">
@@ -862,8 +863,102 @@ include('../lib/generator-header.php');
 </style>
 <link rel="stylesheet" href="../lib/jquery-ui.min.css" type="text/css" media="all"/>
 <script type="text/javascript" src="../lib/jquery-ui.min.js"></script>
+<script src="https://www.google.com/jsapi?key=AIzaSyBwuhiC2DjXzpDzN_Z6pV3BFyAKKhvhWso"></script>
 
+
+<script src="filepicker.js"></script>
+	<script>
+				function initPicker() {
+			var picker = new FilePicker({
+				apiKey: 'AIzaSyBwuhiC2DjXzpDzN_Z6pV3BFyAKKhvhWso',
+				clientId: '841919567480-emp5q0e83sg8qlqspah8c8dbetitefto',
+				buttonEl: document.getElementById('drive_btn'),
+				onSelect: function(file) {
+					console.log(file);
+					document.getElementById('formTitle').value =  file.title;
+					downloadFile(file, callback)
+				}
+			});	
+		}
+		function callback(content)
+		{
+
+			var e = document.getElementById('content');
+			e.innerHTML = content;
+		}
+		function downloadFile(file, callback) {
+			if (file.downloadUrl) {
+				var accessToken = gapi.auth.getToken().access_token;
+				var xhr = new XMLHttpRequest();
+				xhr.open('GET', file.downloadUrl);
+				xhr.setRequestHeader('Authorization', 'Bearer ' + accessToken);
+				xhr.onload = function() {
+				callback(xhr.responseText);
+				};
+				xhr.onerror = function() {
+				callback(null);
+				};
+				xhr.send();
+			} 
+			else {
+				callback(null);
+			}
+		}
+	</script>
+	<script src="https://apis.google.com/js/client.js?onload=initPicker"></script>
 <script type="text/javascript">
+   var clientId = "841919567480-emp5q0e83sg8qlqspah8c8dbetitefto";
+    var apiKey = "AIzaSyBwuhiC2DjXzpDzN_Z6pV3BFyAKKhvhWso";
+    var token;
+
+    function doAuth()
+    {
+        gapi.auth.authorize({
+				client_id: this.clientId + '.apps.googleusercontent.com',
+				scope: 'https://www.googleapis.com/auth/drive',
+				immediate: false
+		}, function(result){
+            gapi.auth.getToken();
+            insertFile();
+        });
+    }
+function insertFile(fileData, callback1) {
+  const boundary = '-------314159265358979323846';
+  const delimiter = "\r\n--" + boundary + "\r\n";
+  const close_delim = "\r\n--" + boundary + "--";
+
+
+    var metadata = {
+      'title': document.getElementById('formTitle').value,
+      'mimeType': 'text/plain'
+    };
+
+    var multipartRequestBody =
+        delimiter +
+        'Content-Type: application/json\r\n\r\n' +
+        JSON.stringify(metadata) +
+        delimiter +
+        'Content-Type: ' + 'text/plain' + '\r\n' +
+        'Content-Transfer-Encoding: base64\r\n' +
+        '\r\n' +
+        btoa(document.getElementById('content').value) +
+        close_delim;
+         if (!callback1) { callback1 = function(file) { console.log("Update Complete ",file) }; }
+    var request = gapi.client.request({
+        'path': '/upload/drive/v2/files',
+        'method': 'POST',
+        'params': {'uploadType': 'multipart'},
+        'headers': {
+          'Content-Type': 'multipart/mixed; boundary="' + boundary + '"'
+        },
+        'body': multipartRequestBody,
+        callback:callback1});
+
+    request.execute(function(data){
+            console.log(data);
+			
+        });
+  }
 jQuery(document).ready(function($){
 	$('#taggen-date-default').datepicker({dateFormat:"mm/dd/yy"});
 	$('#taggen-date-format').change(function() {
