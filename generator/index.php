@@ -870,8 +870,8 @@ include('../lib/generator-header.php');
 	<script>
 				function initPicker() {
 			var picker = new FilePicker({
-				apiKey: 'AIzaSyBwuhiC2DjXzpDzN_Z6pV3BFyAKKhvhWso',
-				clientId: '841919567480-emp5q0e83sg8qlqspah8c8dbetitefto',
+				apiKey: 'AIzaSyDg6e8Qn-R48w0bLVGFs4e4MZmMokoT7tc',
+				clientId: '85067314917-s8ier1iv83iob87rlinek3e5771rrq0h',
 				buttonEl: document.getElementById('drive_btn'),
 				onSelect: function(file) {
 					console.log(file);
@@ -907,8 +907,8 @@ include('../lib/generator-header.php');
 	</script>
 	<script src="https://apis.google.com/js/client.js?onload=initPicker"></script>
 <script type="text/javascript">
-   var clientId = "841919567480-emp5q0e83sg8qlqspah8c8dbetitefto";
-    var apiKey = "AIzaSyBwuhiC2DjXzpDzN_Z6pV3BFyAKKhvhWso";
+   var clientId = "85067314917-s8ier1iv83iob87rlinek3e5771rrq0h";
+    var apiKey = "AIzaSyDg6e8Qn-R48w0bLVGFs4e4MZmMokoT7tc";
     var token;
 
     function doAuth()
